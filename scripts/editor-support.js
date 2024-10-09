@@ -51,7 +51,7 @@ function setUEFilter(element, filter) {
 
 function updateUEInstrumentation() {
   // ----- if browse page, identified by theme
-  if (document.querySelector('body[class^=browse-]').hasAttribute('data-aem-template')) {
+  if (document.body.hasAttribute('data-aem-template')) {
     document.createRange().createContextualFragment(`
       <div class='template-banner'>
         ${document.body.dataset.aemTemplate}

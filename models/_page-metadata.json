@@ -1,0 +1,29 @@
+{
+  "models": [
+    {
+      "id": "page-metadata",
+      "fields": [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template"
+        }
+      ]
+    },
+    {
+      "id": "uetemplate-metadata",
+      "fields": [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template"
+        },
+        {
+          "component": "text",
+          "name": "blue",
+          "label": "Second field Ue template only"
+        } 
+      ]
+    }
+  ]
+}

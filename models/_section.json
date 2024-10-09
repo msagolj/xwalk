@@ -29,6 +29,16 @@
               "value": "highlight"
             }
           ]
+        },
+        {
+          "component": "text",
+          "name": "fragment",
+          "label": "Fragent"
+        },
+        {
+          "component": "text",
+          "name": "fragment2",
+          "label": "Fragent"
         }
       ]
     }
