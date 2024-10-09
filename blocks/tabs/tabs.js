@@ -1,4 +1,4 @@
-import { loadBlocks } from '../../scripts/lib-franklin.js';
+import { decorateBlocks } from '../../scripts/aem.js';
 import { createTag, moveInstrumentation } from '../../scripts/scripts.js';
 
 function changeTabs(e) {
