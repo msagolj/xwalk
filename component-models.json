@@ -108,16 +108,6 @@
             "value": "highlight"
           }
         ]
-      },
-      {
-        "component": "text",
-        "name": "fragment",
-        "label": "Fragent"
-      },
-      {
-        "component": "text",
-        "name": "fragment2",
-        "label": "Fragent"
       }
     ]
   },
@@ -132,19 +122,8 @@
     ]
   },
   {
-    "id": "uetemplate-metadata",
-    "fields": [
-      {
-        "component": "text",
-        "name": "template",
-        "label": "Template"
-      },
-      {
-        "component": "text",
-        "name": "blue",
-        "label": "Second field Ue template only"
-      }
-    ]
+    "id": "article-metadata",
+    "fields": []
   },
   {
     "id": "card",

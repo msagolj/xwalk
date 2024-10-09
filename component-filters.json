@@ -19,6 +19,14 @@
     ]
   },
   {
+    "id": "article-section",
+    "components": [
+      "text",
+      "image",
+      "title"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"

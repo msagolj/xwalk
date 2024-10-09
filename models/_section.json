@@ -8,7 +8,9 @@
           "page": {
             "resourceType": "core/franklin/components/section/v1/section",
             "template": {
-              "model": "section"
+              "model": "section",
+              "filter": "section"
+
             }
           }
         }
@@ -29,16 +31,6 @@
               "value": "highlight"
             }
           ]
-        },
-        {
-          "component": "text",
-          "name": "fragment",
-          "label": "Fragent"
-        },
-        {
-          "component": "text",
-          "name": "fragment2",
-          "label": "Fragent"
         }
       ]
     }
@@ -55,6 +47,14 @@
         "cards",
         "columns",
         "fragment"
+      ]
+    },
+    {
+      "id": "article-section",
+      "components": [
+        "text",
+        "image",
+        "title"
       ]
     }
   ]

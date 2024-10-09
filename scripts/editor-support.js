@@ -50,13 +50,28 @@ function setUEFilter(element, filter) {
 }
 
 function updateUEInstrumentation() {
-  // ----- if browse page, identified by theme
+  const main = document.querySelector('main');
+
+  // if we are on a template page
   if (document.body.hasAttribute('data-aem-template')) {
     const banner = document.createRange().createContextualFragment(`
       <div class='template-banner'>
         INFO: This is the initial content for template ${document.body.dataset.aemTemplate}
       </div`);
     document.body.append(banner);
+
+    // show max available blocks on template
+    document.body.dataset.aueModel = 'page-metadata';
+  }
+
+  // restrictions that apply when NOT EDITING the template itself
+  if (!document.body.hasAttribute('data-aem-template')) {
+    // EDS article pages limitations
+    if (document.querySelector('body[class^=article]')) {
+      main.querySelectorAll('.section').forEach((elem) => {
+        setUEFilter(elem, 'article-section');
+      });
+    }
   }
 }
 
