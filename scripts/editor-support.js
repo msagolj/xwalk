@@ -174,17 +174,6 @@ function handleEditorSelect(event) {
     // click it
     button.click();
   }
-
-  // if a teaser in a carousel was selected
-  if (event.target.closest('.panel-container')) {
-    // switch to the selected carousel slide
-    const carouselItem = event.target;
-    carouselItem.parentElement.scrollTo({
-      top: 0,
-      left: carouselItem.offsetLeft - carouselItem.parentNode.offsetLeft,
-      behavior: 'instant',
-    });
-  }
 }
 
 function attachEventListeners(main) {

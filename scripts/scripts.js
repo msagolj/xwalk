@@ -11,6 +11,7 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  buildBlock
 } from './aem.js';
 
 /**
@@ -60,12 +61,54 @@ async function loadFonts() {
 }
 
 /**
+ * Tabbed layout for Tab section
+ * @param {HTMLElement} main
+ */
+async function buildTabSection(main) {
+  let tabIndex = 0;
+  let tabContainer;
+  let tabFound = false;
+  const sections = main.querySelectorAll('main > div');
+  sections.forEach((section, i) => {
+    const sectionMeta = section.querySelector('.section-metadata > div > div:nth-child(2)');
+    if (sectionMeta?.textContent.includes('tab-section')) {
+      if (!tabFound) {
+        tabIndex += 1;
+        tabFound = true;
+        const tabs = buildBlock('tabs', []);
+        tabs.dataset.tabIndex = tabIndex;
+        tabContainer = document.createElement('div');
+        tabContainer.classList.add('section');
+        if (
+          i > 0 && sections[i - 1]
+            .querySelector('.section-metadata > div > div:nth-child(2)')
+            ?.textContent.includes('article-content-section')
+        ) {
+          tabContainer.classList.add('article-content-section');
+        }
+        tabContainer.append(tabs);
+        main.insertBefore(tabContainer, section);
+      }
+      if (
+        tabFound && !sections[i + 1]
+          ?.querySelector('.section-metadata > div > div:nth-child(2)')
+          ?.textContent.includes('tab-section')
+      ) {
+        tabFound = false;
+      }
+      section.classList.add(`tab-index-${tabIndex}`);
+    }
+  });
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
 function buildAutoBlocks() {
   try {
     // TODO: add auto block, if needed
+    buildTabSection(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

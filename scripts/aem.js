@@ -539,7 +539,7 @@ async function fetchPlaceholders(prefix = 'default') {
  * @param {string} blockName name of the block
  * @param {*} content two dimensional array or string or object of content
  */
-function buildBlock(blockName, content) {
+export function buildBlock(blockName, content) {
   const table = Array.isArray(content) ? content : [[content]];
   const blockEl = document.createElement('div');
   // build image block nested div structure
