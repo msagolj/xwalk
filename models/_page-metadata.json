@@ -14,14 +14,5 @@
       "id": "article-metadata",
       "fields": []
     }
-  ],
-  "filters": [
-    {
-      "id": "main",
-      "components": [
-        "section",
-        "tab-section"
-      ]
-    }
   ]
 }
