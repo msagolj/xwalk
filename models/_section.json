@@ -10,24 +10,6 @@
             "template": {
               "model": "section",
               "filter": "section"
-
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Tab Section",
-      "id": "tab-section",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/section/v1/section",
-            "template": {
-              "name": "Tab Section",
-              "model": "tab-section",
-              "filter": "tab-section",
-              "style": "tab-section"
             }
           }
         }
@@ -48,28 +30,6 @@
               "value": "highlight"
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "tab-section",
-      "fields": [
-        {
-          "component": "select",
-          "name": "style",
-          "value": "",
-          "label": "Style",
-          "description": "The section style",
-          "valueType": "string",
-          "hidden": true,
-          "options": []
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "title",
-          "value": "",
-          "label": "Tab heading"
         }
       ]
     }
@@ -94,24 +54,6 @@
         "text",
         "image",
         "title"
-      ]
-    },
-    {
-      "id": "tab-section",
-      "components": [
-        "text",
-        "image",
-        "button",
-        "title",
-        "columns",
-        "icon-block",
-        "teaser",
-        "detailed-teaser",
-        "video-embed",
-        "media",
-        "block-quote",
-        "callout",
-        "note"
       ]
     }
   ]
