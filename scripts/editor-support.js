@@ -52,6 +52,8 @@ function setUEFilter(element, filter) {
 function updateUEInstrumentation() {
   const main = document.querySelector('main');
 
+  setUEFilter(main, 'page');
+
   // if we are on a template page
   if (document.body.hasAttribute('data-aem-template')) {
     const banner = document.createRange().createContextualFragment(`

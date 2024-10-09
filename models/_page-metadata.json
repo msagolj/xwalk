@@ -14,5 +14,14 @@
       "id": "article-metadata",
       "fields": []
     }
+  ],
+  "filters": [
+    {
+      "id": "page",
+      "components": [
+        "section",
+        "tab-section"
+      ]
+    }
   ]
 }
