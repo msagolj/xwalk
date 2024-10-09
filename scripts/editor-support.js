@@ -10,6 +10,55 @@ import {
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
 
+function getState(block) {
+  const state = {};
+  if (block.matches('.tabs')) state.activeTabId = block.querySelector('[aria-selected="true"]').dataset.tabId;
+  if (block.matches('.carousel')) {
+    const container = block.querySelector('.panel-container');
+    state.scrollLeft = container.scrollLeft;
+  }
+  return state;
+}
+
+function restoreState(newBlock, state) {
+  if (state.activeTabId) {
+    newBlock.querySelector(`[data-tab-id="${state.activeTabId}"]`).click();
+  }
+  if (state.scrollLeft) {
+    newBlock.querySelector('.panel-container').scrollTo({ left: state.scrollLeft, behavior: 'instant' });
+  }
+}
+
+function setIdsforRTETitles(articleContentSection) {
+  // find all titles with no id in the article content section
+  articleContentSection
+    .querySelectorAll('h1:not([id]),h2:not([id]),h3:not([id]),h4:not([id]),h5:not([id]),h6:not([id])')
+    .forEach((title) => {
+      title.id = title.textContent
+        .toLowerCase()
+        .trim()
+        .replaceAll('[^a-z0-9-]', '-')
+        .replaceAll('-{2,}', '-')
+        .replaceAll('^-+', '')
+        .replaceAll('-+$', '');
+    });
+}
+
+// set the filter for an UE editable
+function setUEFilter(element, filter) {
+  element.dataset.aueFilter = filter;
+}
+
+function updateUEInstrumentation() {
+  // ----- if browse page, identified by theme
+  if (document.querySelector('body[class^=browse-]').hasAttribute('data-aem-template')) {
+    document.createRange().createContextualFragment(`
+      <div class='template-banner'>
+        ${document.body.dataset.aemTemplate}
+      </div`);
+  }
+}
+
 async function applyChanges(event) {
   // redecorate default content and blocks on patches (in the properties rail)
   const { detail } = event;
@@ -37,12 +86,13 @@ async function applyChanges(event) {
       element.remove();
       newMain.style.display = null;
       // eslint-disable-next-line no-use-before-define
-      attachEventListners(newMain);
+      attachEventListeners(newMain);
       return true;
     }
 
     const block = element.parentElement?.closest('.block[data-aue-resource]') || element?.closest('.block[data-aue-resource]');
     if (block) {
+      const state = getState(block);
       const blockResource = block.getAttribute('data-aue-resource');
       const newBlock = parsedUpdate.querySelector(`[data-aue-resource="${blockResource}"]`);
       if (newBlock) {
@@ -55,6 +105,7 @@ async function applyChanges(event) {
         await loadBlock(newBlock);
         block.remove();
         newBlock.style.display = null;
+        restoreState(newBlock, state);
         return true;
       }
     } else {
@@ -88,7 +139,39 @@ async function applyChanges(event) {
   return false;
 }
 
-function attachEventListners(main) {
+/**
+ * Event listener for aue:ui-select, selection of a component
+ */
+function handleEditorSelect(event) {
+  // we are only interested in the target
+  if (!event.detail.selected) {
+    return;
+  }
+
+  // if a tab panel was selected
+  if (event.target.closest('.tabpanel')) {
+    // switch to the selected tab
+    const tabItem = event.target.closest('.tabpanel');
+    // get the corresponding tabs button
+    const buttonId = tabItem.getAttribute('aria-labelledby');
+    const button = tabItem.closest('.tabs.block').querySelector(`button[id="${buttonId}"]`);
+    // click it
+    button.click();
+  }
+
+  // if a teaser in a carousel was selected
+  if (event.target.closest('.panel-container')) {
+    // switch to the selected carousel slide
+    const carouselItem = event.target;
+    carouselItem.parentElement.scrollTo({
+      top: 0,
+      left: carouselItem.offsetLeft - carouselItem.parentNode.offsetLeft,
+      behavior: 'instant',
+    });
+  }
+}
+
+function attachEventListeners(main) {
   [
     'aue:content-patch',
     'aue:content-update',
@@ -98,8 +181,17 @@ function attachEventListners(main) {
   ].forEach((eventType) => main?.addEventListener(eventType, async (event) => {
     event.stopPropagation();
     const applied = await applyChanges(event);
-    if (!applied) window.location.reload();
+    if (applied) {
+      updateUEInstrumentation();
+    } else {
+      window.location.reload();
+    }
   }));
+
+  main.addEventListener('aue:ui-select', handleEditorSelect);
 }
 
-attachEventListners(document.querySelector('main'));
+attachEventListeners(document.querySelector('main'));
+
+// update UE component filters on page load
+updateUEInstrumentation();
