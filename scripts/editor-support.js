@@ -52,7 +52,7 @@ function setUEFilter(element, filter) {
 function updateUEInstrumentation() {
   const main = document.querySelector('main');
 
-  setUEFilter(main, 'page');
+  setUEFilter(main, 'main');
 
   // if we are on a template page
   if (document.body.hasAttribute('data-aem-template')) {

@@ -17,7 +17,7 @@
   ],
   "filters": [
     {
-      "id": "page",
+      "id": "main",
       "components": [
         "section",
         "tab-section"
