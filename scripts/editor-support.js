@@ -54,7 +54,7 @@ function updateUEInstrumentation() {
   if (document.body.hasAttribute('data-aem-template')) {
     const banner =  document.createRange().createContextualFragment(`
       <div class='template-banner'>
-        ${document.body.dataset.aemTemplate}
+        INFO: This is the initial content for template ${document.body.dataset.aemTemplate}
       </div`);
     document.body.append(banner);
   }
