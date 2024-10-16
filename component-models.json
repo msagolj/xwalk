@@ -21,7 +21,7 @@
       {
         "component": "text",
         "name": "title",
-        "label": "Title"
+        "label": "Title my"
       },
       {
         "component": "select",
