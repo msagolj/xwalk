@@ -20,7 +20,7 @@
     "fields": [
       {
         "component": "text",
-        "name": "title",
+        "name": "jcr:title",
         "label": "Title my"
       },
       {
