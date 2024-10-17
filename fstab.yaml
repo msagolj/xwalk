@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://https://author-p130360-e1455979.adobeaemcloud.com//bin/franklin.delivery/msagolj/xwalk/main"
+    url: "https://https://author-p130360-e1455979.adobeaemcloud.com/bin/franklin.delivery/msagolj/xwalk/main"
     type: "markup"
     suffix: ".html"
