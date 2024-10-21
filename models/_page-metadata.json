@@ -29,6 +29,16 @@
           "label": "Bulk Template"
         }
       ]
+    },
+    {
+      "id": "test-metadata",
+      "fields": [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "TEmplate test"
+        }
+      ]
     }
   ]
 }

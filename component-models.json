@@ -142,6 +142,16 @@
     ]
   },
   {
+    "id": "test-metadata",
+    "fields": [
+      {
+        "component": "text",
+        "name": "template",
+        "label": "TEmplate test"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
