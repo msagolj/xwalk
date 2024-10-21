@@ -12,7 +12,13 @@
     },
     {
       "id": "article-metadata",
-      "fields": []
+      "fields": [
+        {
+          "component": "text",
+          "name": "author",
+          "label": "Author"
+        }
+      ]
     }
   ]
 }
