@@ -132,6 +132,16 @@
     ]
   },
   {
+    "id": "bulktemplate-metadata",
+    "fields": [
+      {
+        "component": "text",
+        "name": "bulk",
+        "label": "Bulk Template"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
